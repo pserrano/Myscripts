@@ -122,6 +122,50 @@ unzip -qq datapipeline-cli.zip
 sudo rsync -a --no-o --no-g datapipeline-cli/ /usr/local/aws/datapipeline/
 
 
+#Setup Aws Credentials and Env
+
+
+mkdir -m 0700 $HOME/.aws-default/
+
+cp $HOME/.aws-default/
+cp 
+
+touch $HOME/.aws-default/aws-credential-file.txt
+
+echo "AWSAccessKeyId=<insert your AWS access id here>
+AWSSecretKey=<insert your AWS secret access key here>" >> $HOME/.aws-default/aws-credential-file.txt
+
+touch $HOME/.aws-default/aws-credentials.json
+
+echo
+"{
+"access-id": "<insert your AWS access id here>",
+"private-key": "<insert your AWS secret access key here>",
+"key-pair": "<insert the name of your Amazon ec2 key-pair here>",
+"key-pair-file": "<insert the path to the .pem file for your Amazon ec2 key pair here>",
+"region": "<The region where you wish to launch your job flows. Should be one of us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, or ap-northeast-1, sa-east-1>", 
+  "use-ssl": "true",
+  "log-uri": "s3://yourbucket/datapipelinelogs"
+}"" >> $HOME/.aws-default/aws-credentials.json
+
+touch $HOME/.aws-secrets
+
+echo " %awsSecretAccessKeys = (
+  'default' => {
+    id => '<insert your AWS access id here>',
+    key => '<insert your AWS secret access key here>',
+  },
+);"
+
+ln -s $HOME/.aws-secrets $HOME/.s3curl
+chmod 600 $HOME/.aws-default/* $HOME/.aws-secrets
+
+
+
+
+
+
+
 #Export needs
 
 export JAVA_HOME=/usr
@@ -151,3 +195,8 @@ export EC2_CERT=$(echo $HOME/.aws-default/cert-*.pem)
 export AWS_CREDENTIAL_FILE=$HOME/.aws-default/aws-credential-file.txt
 export ELASTIC_MAPREDUCE_CREDENTIALS=$HOME/.aws-default/aws-credentials.json
 export DATA_PIPELINE_CREDENTIALS=$HOME/.aws-default/aws-credentials.json
+
+
+## Setup current shell
+
+source $HOME/.bashrc
