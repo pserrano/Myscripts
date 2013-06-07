@@ -1,7 +1,7 @@
 #! /bin/bash
 ##Install deps for debian/ubuntu
 sudo apt-get update
-sudo apt-get install -y openjdk-6-jre ruby1.8-full rubygems libxml2-utils libxml2-dev libxslt-dev unzip cpanminus build-essential
+sudo apt-get install -y openjdk-6-jre ruby1.8-full rubygems libxml2-utils libxml2-dev libxslt-dev unzip cpanminus build-essential cpanminus
 
 ##Install ruby deps
 sudo gem install uuidtools json httparty nokogiri
