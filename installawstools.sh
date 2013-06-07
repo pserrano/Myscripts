@@ -138,7 +138,7 @@ AWSSecretKey=<insert your AWS secret access key here>" >> $HOME/.aws-default/aws
 touch $HOME/.aws-default/aws-credentials.json
 
 echo
-"{
+'{
 "access-id": "<insert your AWS access id here>",
 "private-key": "<insert your AWS secret access key here>",
 "key-pair": "<insert the name of your Amazon ec2 key-pair here>",
@@ -146,25 +146,20 @@ echo
 "region": "<The region where you wish to launch your job flows. Should be one of us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, or ap-northeast-1, sa-east-1>", 
   "use-ssl": "true",
   "log-uri": "s3://yourbucket/datapipelinelogs"
-}"" >> $HOME/.aws-default/aws-credentials.json
+}' >> $HOME/.aws-default/aws-credentials.json
 
 touch $HOME/.aws-secrets
 
-echo " %awsSecretAccessKeys = (
+echo ' %awsSecretAccessKeys = (
   'default' => {
     id => '<insert your AWS access id here>',
     key => '<insert your AWS secret access key here>',
   },
-);"
+);'
+
 
 ln -s $HOME/.aws-secrets $HOME/.s3curl
 chmod 600 $HOME/.aws-default/* $HOME/.aws-secrets
-
-
-
-
-
-
 
 #Export needs
 
